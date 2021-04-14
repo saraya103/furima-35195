@@ -9,7 +9,7 @@
 |first_kana         |string  |null:false              |
 |last_kana          |string  |null:false              |
 |nickname           |string  |null:false              |
-|date               |string  |null:false              |
+|birthday           |date    |null:false              |
 
 ### Association
 has_many :items
