@@ -1,24 +1,60 @@
-# README
+## users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column     |Type   |Options    |
+|-----------|-------|-----------|
+|email      |string |null:false |
+|password   |string |null:false |
+|first_name |string |null:false |
+|last_name  |string |null:false |
+|first_kana |string |null:false |
+|last_kana  |string |null:false |
+|nickname   |string |null:false |
 
-Things you may want to cover:
+### Association
+has_many :items
+has_many :purchase_logs
 
-* Ruby version
+## items テーブル
 
-* System dependencies
+|Column       |Type       |Options                      |
+|-------------|-----------|-----------------------------|
+|item_name    |string     |null:false                   |
+|content      |text       |null:false                   |
+|category     |integer    |null:false                   |
+|condition    |integer    |null:false                   |
+|shipping_fee |integer    |null:false                   |
+|from         |integer    |null:false                   |
+|day          |integer    |null:false                   |
+|price        |integer    |null:false, precision:7      |
+|user         |references |null:false, foreign_key:true |
 
-* Configuration
+### Association
+belongs_to : user
+has_one :purchase_log
 
-* Database creation
+## purchase_logs テーブル
 
-* Database initialization
+|Column       |Type       |Options                      |
+|-------------|-----------|-----------------------------|
+|user         |references |null:false, foreign_key:true |
+|item         |references |null:false, foreign_key:true |
 
-* How to run the test suite
+### Association
+belongs_to :user
+belongs_to :item
+has_one :purchase
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchases テーブル
 
-* Deployment instructions
+|Column        |Type       |Options                      |
+|--------------|-----------|-----------------------------|
+|postal_number |text       |null:false                   |
+|prefecture    |text       |null:false                   |
+|city          |string     |null:false                   |
+|address       |string     |null:false                   |
+|building      |string     |                             |
+|tel           |integer    |null:false, precision:11     |
+|purchase_log  |references |null:false, foreign_key:true |
 
-* ...
+### Association
+belongs_to :purchase_log
