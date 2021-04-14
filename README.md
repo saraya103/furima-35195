@@ -3,16 +3,13 @@
 |Column             |Type    |Options                 |
 |-------------------|--------|------------------------|
 |email              |string  |null:false, unique:true |
-|password           |string  |null:false              |
 |encrypted_password |string  |null:false              |
 |first_name         |string  |null:false              |
 |last_name          |string  |null:false              |
 |first_kana         |string  |null:false              |
 |last_kana          |string  |null:false              |
 |nickname           |string  |null:false              |
-|year               |integer |null:false              |
-|month              |integer |null:false              |
-|day                |integer |null:false              |
+|date               |string  |null:false              |
 
 ### Association
 has_many :items
