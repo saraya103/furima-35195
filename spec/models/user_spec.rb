@@ -8,7 +8,6 @@ RSpec.describe User, type: :model do
 
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
-        binding.pry
         expect(@user).to be_valid
       end
     end
@@ -23,6 +22,12 @@ RSpec.describe User, type: :model do
         @user.email = "hogehoge"
         @user.valid?
         expect(@user.errors.full_messages).to include("Email is invalid")
+      end
+        it 'emailが登録済みだと保存できないこと' do
+          existing_user = FactoryBot.create(:user)
+          @user.email = existing_user.email
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Email has already been taken")
       end
       it 'passwordが空だと保存できないこと' do
         @user.password = ""
@@ -39,13 +44,19 @@ RSpec.describe User, type: :model do
         @user.password = "123456"
         @user.password_confirmation = "123456"
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid. Input alphanumeric characters.")
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
       end
       it 'passwordが英字のみだと保存できないこと' do
         @user.password = "abcdef"
         @user.password_confirmation = "abcdef"
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid. Input alphanumeric characters.")
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
+      end
+      it 'passwordが全角だと保存できないこと' do
+        @user.password = "testテスト１２３４1234"
+        @user.password_confirmation = "testテスト１２３４1234"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
       end
       it 'password_confirmationが空だと保存できないこと' do
         @user.password_confirmation = ""
