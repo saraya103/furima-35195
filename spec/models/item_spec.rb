@@ -33,8 +33,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
+      it 'category_idが0だと保存できないこと' do
+        @item.category_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
       it 'condition_idが空だと保存できないこと' do
         @item.condition_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it 'condition_idが0だと保存できないこと' do
+        @item.condition_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
@@ -43,13 +53,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
       end
+      it 'shipping_fee_idが0だと保存できないこと' do
+        @item.shipping_fee_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
+      end
       it 'from_idが空だと保存できないこと' do
         @item.from_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("From can't be blank")
       end
+      it 'from_idが0だと保存できないこと' do
+        @item.from_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("From can't be blank")
+      end
       it 'day_idが空だと保存できないこと' do
         @item.day_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day can't be blank")
+      end
+      it 'day_idが0だと保存できないこと' do
+        @item.day_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Day can't be blank")
       end
