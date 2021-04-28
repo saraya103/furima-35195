@@ -55,7 +55,7 @@ has_one :order
 |address       |string     |null:false                   |
 |building      |string     |                             |
 |tel           |string     |null:false                   |
-|order_log  |references |null:false, foreign_key:true |
+|order_log     |references |null:false, foreign_key:true |
 
 ### Association
 belongs_to :order_log

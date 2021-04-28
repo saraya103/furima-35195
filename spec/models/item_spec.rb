@@ -58,15 +58,15 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
       end
-      it 'from_idが空だと保存できないこと' do
-        @item.from_id = ''
+      it 'prefecture_idが空だと保存できないこと' do
+        @item.prefecture_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("From can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'from_idが0だと保存できないこと' do
-        @item.from_id = 0
+      it 'prefecture_idが0だと保存できないこと' do
+        @item.prefecture_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("From can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'day_idが空だと保存できないこと' do
         @item.day_id = ''
