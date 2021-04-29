@@ -2,9 +2,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :owner_check, only: [:edit, :update, :destroy]
+  before_action :soldout_check, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
+    @orderlogs = OrderLog.includes(:user)
   end
 
   def new
@@ -43,6 +45,7 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+    @orderlog = OrderLog.find_by(item_id: @item.id)
   end
 
   def item_params
@@ -52,5 +55,10 @@ class ItemsController < ApplicationController
 
   def owner_check
     redirect_to root_path unless current_user.id == @item.user_id
+  end
+
+  def soldout_check
+    @orderlog = OrderLog.find_by(item_id: @item.id)
+    redirect_to root_path unless @orderlog.nil?
   end
 end

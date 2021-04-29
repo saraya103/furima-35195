@@ -13,7 +13,7 @@
 
 ### Association
 has_many :items
-has_many :purchase_logs
+has_many :order_logs
 
 ## items テーブル
 
@@ -31,9 +31,9 @@ has_many :purchase_logs
 
 ### Association
 belongs_to : user
-has_one :purchase_log
+has_one :order_log
 
-## purchase_logs テーブル
+## order_logs テーブル
 
 |Column       |Type       |Options                      |
 |-------------|-----------|-----------------------------|
@@ -43,9 +43,9 @@ has_one :purchase_log
 ### Association
 belongs_to :user
 belongs_to :item
-has_one :purchase
+has_one :order
 
-## purchases テーブル
+## orders テーブル
 
 |Column        |Type       |Options                      |
 |--------------|-----------|-----------------------------|
@@ -55,7 +55,7 @@ has_one :purchase
 |address       |string     |null:false                   |
 |building      |string     |                             |
 |tel           |string     |null:false                   |
-|purchase_log  |references |null:false, foreign_key:true |
+|order_log     |references |null:false, foreign_key:true |
 
 ### Association
-belongs_to :purchase_log
+belongs_to :order_log
