@@ -52,6 +52,11 @@ RSpec.describe Log, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include('Tel is valid. Input onpy number')
       end
+      it 'telが12桁以上だと保存できないこと' do
+        @order.tel = '1145141919810'
+        @order.valid?
+        expect(@order.errors.full_messages).to include('Tel is valid. Input onpy number')
+      end
       it 'userが紐づいていないと保存できないこと' do
         @order.user = nil
         @order.valid?

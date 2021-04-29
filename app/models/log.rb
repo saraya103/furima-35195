@@ -6,7 +6,7 @@ class Log
     validates :postal_number, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :city
     validates :address
-    validates :tel, numericality: { only_integer: true, message: 'is invalid. Input only number' }
+    validates :tel, numericality: { only_integer: true, message: 'is invalid. Input only number' }, length: { maximum: 11 ,message: 'is too long. Input 11 numbers.' }
     validates :token
     validates :item_id
     validates :user_id
